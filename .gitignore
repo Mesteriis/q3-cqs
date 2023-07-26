@@ -17,6 +17,7 @@
 cmake-build-*/
 .idea/**/mongoSettings.xml
 *.iws
+.vscode/
 out/
 .idea_modules/
 atlassian-ide-plugin.xml
