@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}User Registration{% endblock %}
+{% block content %}
+<div class="container fa-align-justify form_reg">
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h2>User Registration</h2>
+                        <form class="requires-validation" method="post" action="{% url 'registration_view' %}">
+                            {% csrf_token %}
+                            <div class="col-md-12">
+                                <input class="form-control input_reg" type="email" name="email" placeholder="E-mail Address" required>
+                            </div>
+                           <div class="col-md-12">
+                              <input class="form-control input_reg" type="password" name="password" placeholder="Password" required>
+                           </div>
+                            <div class="form-button mt-3">
+                                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                        <p>Already registered? <a href="{% url 'login_view' %}">Login here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
