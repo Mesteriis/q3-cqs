@@ -24,7 +24,10 @@ class CodeFileRetrieveSerializer(serializers.ModelSerializer):
         return ReportSerializer(checks, many=True).data
 
     def get_last_check(self, obj):
-        latest_report = Report.objects.filter(file=obj).order_by('-created').first()
-        if latest_report:
+        if (
+            latest_report := Report.objects.filter(file=obj)
+            .order_by('-created')
+            .first()
+        ):
             return latest_report.created
         return None
