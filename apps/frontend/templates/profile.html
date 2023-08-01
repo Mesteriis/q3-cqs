@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}User Profile{% endblock %}
+{% block content %}
+    <div class="flex">
+        <div class="header">
+            <h3 class="welcome">Welcome, {{ user.email }}!</h3>
+            <a href="{% url 'logout_view' %}" class="logout">Logout</a>
+        </div>
+        <div class="files">
+            <div class="form-body">
+                <h4>Uploaded files:</h4>
+                {% if files %}
+                    <ul>
+                        {% for file in files %}
+                            <li>
+                                <strong>{{ file.file.file }}</strong>&nbsp;&nbsp;&nbsp;<a href="#">Download file</a> |
+                                <a href="#">Report</a><br>
+                                <span style="color: #ffffff;">status: {{ file.status }}</span><br>
+                                <span style="color: #60a151;">uploaded: {{ file.file.created|date:"H:i, d-m-Y" }}</span><br>
+                                <span style="color: #c2bf6f;">changed: {{ file.file.updated|date:"H:i, d-m-Y" }}</span>
+                            <p></p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-secondary">There is no files yet!</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="header">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="file" class="custom-file-input" id="customFile" required>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
