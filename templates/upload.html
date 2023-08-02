@@ -1,0 +1,26 @@
+<!-- templates/registration/signup.html -->
+{% extends "base.html" %}
+
+{% block title %}Files{% endblock %}
+
+{% block content %}
+<h2>Files</h2>
+
+{% if files_list %}
+    <ul>
+      {% for file in files_list %}
+      <li>
+        {{ file.file }} - <a href="/v1/files/{{ file.uid }}/"><button>Delete</button></a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no files.</p>
+  {% endif %}
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form>
+{% endblock %}
