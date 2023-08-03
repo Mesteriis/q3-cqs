@@ -5,8 +5,8 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  <h3><a href="v1/files">Your files</a></h3>
-  <h3><a href="v1/reports">Your reports</a></h3>
+  <h3><a href="{% url 'api:files-list' %}">Your files</a></h3>
+  <h3><a href="{% url 'api:reports-list' %}">Your reports</a></h3>
   <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}
   <p>You are not logged in</p>

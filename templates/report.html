@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Reports{% endblock %}
+
+{% block content %}
+<h2>Report for file {{ report.file.file }}</h2>
+
+{% for error in report.result %}
+<ul>
+    <li>Last check: {{ error.check_time }} | Line: {{ error.line }} | Column: {{ error.column }} | Error: {{ error.error }}</li>
+</ul>
+{% endfor %}
+
+{% endblock %}

@@ -10,7 +10,7 @@
     <ul>
       {% for report in reports_list %}
       <li>
-        {{ report.created }}: <a href="/v1/reports/{{ report.pk }}">{{ report.file.file }}</a> - {{ report.status }}
+        {{ report.created }}: <a href="{% url 'api:reports-detail' report.pk %}">{{ report.file.file }}</a> - {{ report.status }} <form method="post" action="{% url 'api:reports-review-report' report.pk %}">{% csrf_token %}<button type="submit">Review</button></form>
       </li>
       {% endfor %}
     </ul>

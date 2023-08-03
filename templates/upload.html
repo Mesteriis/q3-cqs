@@ -10,7 +10,7 @@
     <ul>
       {% for file in files_list %}
       <li>
-        {{ file.file }} - <a href="/v1/files/{{ file.uid }}/"><button>Delete</button></a>
+        {{ file.file }} - <a href="{% url 'api:files-detail' file.uid %}"><button>Delete</button></a>
       </li>
       {% endfor %}
     </ul>
