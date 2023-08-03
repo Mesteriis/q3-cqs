@@ -30,6 +30,7 @@ fabric.properties
 .idea/httpRequests
 .idea/caches/build_file_checksums.ser
 *~
+code_files
 .fuse_hidden*
 .directory
 .Trash-*
@@ -131,3 +132,4 @@ cython_debug/
 /staticfiles/*
 /media/*
 /log/*
+/code_files/
