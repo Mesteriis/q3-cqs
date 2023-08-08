@@ -3,6 +3,8 @@ from files.models import CodeFile
 
 
 class CodeFileSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = CodeFile
-        fields = ['file', 'user', 'created', 'updated']
+        fields = ['uid', 'file', 'user', 'created', 'updated']

@@ -1,7 +1,8 @@
+from django.urls import path, include
 from rest_framework.routers import SimpleRouter
+
 from .files import CodeFileViewSet
 from .reports import ReportViewSet
-from django.urls import path, include
 
 router = SimpleRouter()
 

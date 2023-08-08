@@ -10,7 +10,7 @@
     <ul>
       {% for file in files_list %}
       <li>
-        {{ file.file }} - <a href="{% url 'api:files-detail' file.uid %}"><button>Delete</button></a>
+        {{ file.file }} - <a href="{% url 'delete_file' file.pk %}"><button>Delete</button></a>
       </li>
       {% endfor %}
     </ul>
@@ -23,4 +23,8 @@
   {{ form.as_p }}
   <button type="submit">Upload</button>
 </form>
+
+<br>
+<h3><a href="{% url 'home' %}">Home</a></h3>
+
 {% endblock %}
