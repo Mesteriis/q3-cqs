@@ -18,8 +18,6 @@ class UserLogin(APIView):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            if Token.objects.filter(user=user).first():
-                Token.objects.get(user=user).delete()
-                token = Token.objects.create(user=user)
+            token, _ = Token.objects.get_or_create(user=user)
             return Response(data={'token': token.key}, status=HTTP_202_ACCEPTED)
         return Response(status=HTTP_400_BAD_REQUEST)

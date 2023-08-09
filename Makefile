@@ -23,7 +23,7 @@ load_fixtures:
 	DJANGO_SETTINGS_MODULE=config.settings.dev poetry run ./manage.py loaddata ./fixtures/tasks.json
 
 run_server:
-	DJANGO_SETTINGS_MODULE=config.settings.dev poetry run ./manage.py runservern
+	DJANGO_SETTINGS_MODULE=config.settings poetry run ./manage.py runserver
 
 run_server_docker:
 	docker-compose -f local.yml up --build django

@@ -1,5 +1,7 @@
 import subprocess
 from datetime import datetime
+
+from django.core.mail import send_mail
 from reports.models import Status
 
 
@@ -15,6 +17,7 @@ class ReportReviewService:
     def save_results(self):
         result = []
         errors_list = self._get_errors_list()
+
         for error in errors_list[:-1]:
             error = error.split(':')
             result.append(
@@ -28,4 +31,13 @@ class ReportReviewService:
 
         self.report.result = result
         self.report.status = Status.reviewed
+        self.report.save()
+
+    def send_email_results(self):
+        # send_mail(
+        #     subject=f'Your report is reviewed!',
+        #     message=f'Your file {self.report.file.file} was reviewed.',
+        #     recipient_list=[f'{self.report.user.email}']
+        # )
+        self.report.is_sent = True
         self.report.save()

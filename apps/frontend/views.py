@@ -46,7 +46,8 @@ class CodeFileFrontViewSet(
 class FileDeleteView(DeleteView):
     model = CodeFile
     success_url = reverse_lazy('files_front-list')
-    template_name = 'delete_confirm.html'
+    # template_name = 'delete_confirm.html'
+
 
 class ReportFrontViewSet(
     CreateModelMixin, RetrieveModelMixin, ListModelMixin, GenericViewSet
