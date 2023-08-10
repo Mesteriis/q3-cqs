@@ -1,0 +1,14 @@
+<!-- templates/registration/signup.html -->
+{% extends "base.html" %}
+
+{% block title %}Files{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object.file }}"?</p>
+    <input type="submit" value="Confirm" />
+</form>
+
+{% endblock %}

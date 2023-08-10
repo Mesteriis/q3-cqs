@@ -1,7 +1,53 @@
 version: '3'
 
-
 services:
+  django:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  celery_beat:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      django:
+        condition: service_started
+    command: celery --app=config beat
+
+  celery_worker:
+      build:
+        context: .
+        dockerfile: ./Dockerfile
+      env_file:
+        - .env
+      depends_on:
+        db:
+          condition: service_healthy
+        redis:
+          condition: service_healthy
+        django:
+          condition: service_started
+        celery_beat:
+          condition: service_started
+      command: celery --app=config worker
+
   db:
     image: postgres:14
     environment:
@@ -26,3 +72,8 @@ services:
       - "6379:6379"
     volumes:
       - ./data/cache:/data
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
+      interval: 1s
+      timeout: 3s
+      retries: 5
