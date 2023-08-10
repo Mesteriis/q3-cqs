@@ -11,8 +11,7 @@ class ReportReviewService:
 
     def _get_errors_list(self):
         var = subprocess.Popen(['flake8', f'./{self.report.file.file}'], stdout=subprocess.PIPE)
-        errors_list = (var.communicate()[0].decode('utf-8').split('\n'))
-        return errors_list
+        return (var.communicate()[0].decode('utf-8').split('\n'))
 
     def save_results(self):
         result = []
